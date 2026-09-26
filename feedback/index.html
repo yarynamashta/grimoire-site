@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Help shape Grimoire. Report a bug, share an idea, or tell us what could feel better.">
+  <meta name="theme-color" content="#0d0b14">
+  <title>Share your thoughts · Grimoire</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="../assets/feedback.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to feedback</a>
+  <header><span class="seal" aria-hidden="true">☾</span><span class="wordmark">Grimoire</span><span class="edition">A book of your own</span></header>
+  <main id="main">
+    <div class="intro"><p class="eyebrow">A note to the makers</p><h1>Help shape<br><em>Grimoire.</em></h1><p>Something broke? A little confusing? An idea you keep coming back to? We’d love to hear it.</p></div>
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Share your thoughts</h2>
+      <p class="hint">Your dreams are yours. Please use made-up examples instead of private journal entries, and never share recovery codes.</p>
+      <!-- FILLOUT -->
+      <div id="email-form" hidden>
+        <form id="feedback-form">
+          <label for="category">What’s on your mind?</label>
+          <select id="category" name="category"><option>Something broke</option><option>Something is confusing</option><option>An idea</option><option>General feedback</option></select>
+          <label for="summary">A short summary</label>
+          <input id="summary" name="summary" maxlength="160" required placeholder="Give your note a title">
+          <label for="details">Tell us a little more</label>
+          <textarea id="details" name="details" rows="6" maxlength="4000" required placeholder="What happened, or what would you like to see?"></textarea>
+          <p class="hint">This prepares an email. You’ll review it here, then send it from your email app. Your sender address will be visible to us.</p>
+          <button type="submit">Review your note <span aria-hidden="true">↗</span></button>
+        </form>
+        <section id="review" hidden aria-labelledby="review-title" tabindex="-1">
+          <h3 id="review-title">Your note, ready to review</h3><pre id="report"></pre>
+          <div class="actions"><a class="button" id="send-email" href="mailto:info@reasonswithin.com">Continue to email ↗</a><button class="secondary" id="copy" type="button">Copy note</button><button class="secondary" id="edit" type="button">Keep editing</button></div>
+          <p class="hint">Nothing is sent until you send the email. If no email app opens, copy your note and email it to the address below.</p>
+          <p id="status" role="status"></p>
+        </section>
+      </div>
+      <noscript><p>Email your feedback to the address below, with “Grimoire feedback” in the subject.</p></noscript>
+    </section>
+    <aside class="email"><p>Prefer email?</p><a href="mailto:info@reasonswithin.com?subject=Grimoire%20feedback">info@reasonswithin.com</a><p class="hint">Please mention Grimoire so your note reaches the right place.</p></aside>
+    <details class="privacy"><summary>About your feedback &amp; privacy</summary><p>Feedback is separate from your journal. This page does not read your entries or attach files, account identifiers, or device details. It does not save your draft; keep this page open until you finish.</p><p>Email feedback goes to the Grimoire team at the address above through your email provider. If you use the embedded form, Fillout processes the information you choose to submit. Only include an email address there if you want a reply.</p><p>Questions about your feedback or a deletion request? Email us with “Grimoire feedback” in the subject.</p></details>
+  </main>
+  <footer>A little better, with every note.<span aria-hidden="true">✧</span>Grimoire</footer>
+</body>
+</html>
