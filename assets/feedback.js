@@ -12,7 +12,7 @@ if (hosted) {
   hosted.href = url.href;
   const frame = document.createElement('iframe');
   frame.src = url.href;
-  frame.title = 'Grimoire feedback form';
+  frame.title = 'Veiled Pages feedback form';
   frame.className = 'feedback-embed';
   frame.referrerPolicy = 'no-referrer';
   document.querySelector('#hosted-container').append(frame);
@@ -30,9 +30,9 @@ form.addEventListener('submit', (event) => {
     if (!input.reportValidity()) return;
   }
   const data = new FormData(form);
-  const report = `Grimoire feedback\n\nType: ${data.get('category')}\n\nSummary: ${data.get('summary').trim()}\n\n${data.get('details').trim()}`;
+  const report = `Veiled Pages feedback\n\nType: ${data.get('category')}\n\nSummary: ${data.get('summary').trim()}\n\n${data.get('details').trim()}`;
   document.querySelector('#report').textContent = report;
-  document.querySelector('#send-email').href = `mailto:info@reasonswithin.com?subject=Grimoire%20feedback&body=${encodeURIComponent(report)}`;
+  document.querySelector('#send-email').href = `mailto:info@reasonswithin.com?subject=Veiled%20Pages%20feedback&body=${encodeURIComponent(report)}`;
   form.hidden = true;
   review.hidden = false;
   status.textContent = '';

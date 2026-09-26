@@ -1,22 +1,26 @@
-import { readFile, mkdir, cp, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
-const config = JSON.parse(await readFile(`${root}config.json`, 'utf8'));
-const configured = process.env.FILLOUT_URL || config.filloutURL;
-let embed = '';
-if (configured) {
-  const url = new URL(configured);
-  if (url.protocol !== 'https:' || url.username || url.password || url.port ||
-      !(url.hostname === 'fillout.com' || url.hostname.endsWith('.fillout.com')) ||
-      !/^\/t\/[a-zA-Z0-9]+\/?$/.test(url.pathname)) throw new Error('Expected a published HTTPS Fillout form URL.');
-  url.search = ''; url.hash = '';
-  embed = `<div id="hosted-container"><p class="hint">This form is hosted by Fillout, which processes your submission.</p><p><a id="hosted-form" href="${url.href}" target="_blank" rel="noopener noreferrer">Open the form in a new tab ↗</a></p></div>`;
+for (const route of ['', 'feedback/', 'privacy/']) {
+  const target = `https://yarynamashta.github.io/veiled-pages-site/${route}`;
+  const html = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="robots" content="noindex"><title>Veiled Pages — new address</title><link rel="canonical" href="${target}"><meta http-equiv="refresh" content="1;url=${target}"></head>
+<body><main><h1>Veiled Pages</h1><p>Our website has moved.</p><p><a href="${target}">Continue to Veiled Pages</a></p></main>
+<script>
+const target = new URL(${JSON.stringify(target)});
+if (!target.pathname.endsWith('/privacy/')) {
+  const incoming = new URLSearchParams(location.search);
+  const source = incoming.get('source');
+  if (['ios', 'android', 'website'].includes(source)) target.searchParams.set('source', source);
+  for (const key of ['app_version', 'ios_version', 'android_version']) {
+    const value = incoming.get(key);
+    if (value && /^\\d{1,4}(?:\\.\\d{1,4}){0,3}$/.test(value)) target.searchParams.set(key, value);
+  }
 }
-await mkdir(`${root}dist/feedback`, { recursive: true });
-await cp(`${root}assets`, `${root}dist/assets`, { recursive: true });
-const html = (await readFile(`${root}feedback/index.html`, 'utf8')).replace('<!-- FILLOUT -->', embed);
-await writeFile(`${root}dist/feedback/index.html`, html);
-await writeFile(`${root}dist/index.html`, html.replaceAll('../assets/', './assets/').replaceAll('../privacy/', './privacy/'));
-await cp(`${root}privacy`, `${root}dist/privacy`, { recursive: true });
+location.replace(target.href);
+</script></body></html>`;
+  await mkdir(`${root}dist/${route}`, { recursive: true });
+  await writeFile(`${root}dist/${route}index.html`, html);
+}
 await writeFile(`${root}dist/.nojekyll`, '');
-console.log(`Built feedback page (${configured ? 'Fillout' : 'email review'}).`);
+console.log('Built legacy address redirects to Veiled Pages.');

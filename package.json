@@ -1,5 +1,5 @@
 {
-  "name": "grimoire-feedback",
+  "name": "veiled-pages-feedback",
   "private": true,
   "type": "module",
   "scripts": { "build": "node scripts/build.mjs", "preview": "python3 -m http.server 4174 --directory dist --bind 127.0.0.1" }
