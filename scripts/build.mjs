@@ -16,6 +16,7 @@ await mkdir(`${root}dist/feedback`, { recursive: true });
 await cp(`${root}assets`, `${root}dist/assets`, { recursive: true });
 const html = (await readFile(`${root}feedback/index.html`, 'utf8')).replace('<!-- FILLOUT -->', embed);
 await writeFile(`${root}dist/feedback/index.html`, html);
-await writeFile(`${root}dist/index.html`, html.replaceAll('../assets/', './assets/'));
+await writeFile(`${root}dist/index.html`, html.replaceAll('../assets/', './assets/').replaceAll('../privacy/', './privacy/'));
+await cp(`${root}privacy`, `${root}dist/privacy`, { recursive: true });
 await writeFile(`${root}dist/.nojekyll`, '');
 console.log(`Built feedback page (${configured ? 'Fillout' : 'email review'}).`);

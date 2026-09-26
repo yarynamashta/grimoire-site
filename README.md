@@ -20,6 +20,10 @@ Until configured, the page offers a native email preparation form with review an
 
 Use the deployed `/feedback/` URL for both apps. Optional context parameters: `source=ios` or `source=android`, `app_version`, `ios_version`, `android_version`. Only numeric dotted versions are forwarded to Fillout; arbitrary incoming parameters are dropped. Language is `en`. Register these URL parameters in Fillout if you want them captured. They are unverified user-editable context. Never put journal text, recovery codes, email addresses, or account identifiers in URLs.
 
-Native app navigation has not been changed. The form is English only. Drafts are not persisted. The site bundles the app's Cormorant Garamond font and its OFL license. GitHub Pages hosts the page; there is no site analytics SDK.
+Both native apps link to the hosted feedback page. Settings also links to `/privacy/`, which renders without JavaScript or a Fillout embed. The form is English only. Drafts are not persisted. The site bundles the app's Cormorant Garamond font and its OFL license. GitHub Pages hosts the page; there is no site analytics SDK.
 
 Deployment follows [GitHub's Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+## Privacy policy
+
+`privacy/index.html` describes local storage, optional provider sync, backups and exports, feedback services, website hosting, beta diagnostics, retention and deletion choices. Keep it aligned with app and service changes; its public URL is https://yarynamashta.github.io/grimoire-site/privacy/.
